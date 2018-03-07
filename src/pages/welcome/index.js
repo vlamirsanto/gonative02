@@ -29,4 +29,8 @@ const Welcome = () => (
   </View>
 );
 
+Welcome.navigationOptions = {
+  header: null,
+};
+
 export default Welcome;
