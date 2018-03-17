@@ -11,7 +11,7 @@ const styles = StyleSheet.create({
   },
   title: {
     textAlign: 'center',
-    color: '#ffffff',
+    color: colors.white,
     fontWeight: 'bold',
     fontSize: 24,
   },
@@ -43,6 +43,11 @@ const styles = StyleSheet.create({
     color: colors.white,
     fontWeight: 'bold',
     fontSize: 14,
+  },
+  error: {
+    color: colors.danger,
+    textAlign: 'center',
+    marginTop: metrics.baseMargin,
   },
 });
 
