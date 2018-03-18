@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, AsyncStorage, ActivityIndicator, FlatList, Text } from 'react-native';
+import { View, AsyncStorage, ActivityIndicator, FlatList } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 import api from 'services/api';
@@ -17,6 +17,7 @@ export default class Repositories extends Component {
   state = {
     data: [],
     loading: true,
+    refreshing: false,
   }
 
   componentDidMount() {
@@ -24,13 +25,18 @@ export default class Repositories extends Component {
   }
 
   loadRepositories = async () => {
-    const username = await AsyncStorage.getItem('@Githuber:username');
-    const response = await api.get(`/users/${username}/repos`);
+    this.setState({ refreshing: true });
 
-    this.setState({
-      data: response.data,
-      loading: false,
-    });
+    setTimeout(async () => {
+      const username = await AsyncStorage.getItem('@Githuber:username');
+      const response = await api.get(`/users/${username}/repos`);
+
+      this.setState({
+        data: response.data,
+        loading: false,
+        refreshing: false,
+      });
+    }, 3000);
   }
 
   renderList = () => (
@@ -38,6 +44,8 @@ export default class Repositories extends Component {
       data={this.state.data}
       keyExtractor={item => String(item.id)}
       renderItem={this.renderListItem}
+      onRefresh={this.loadRepositories}
+      refreshing={this.state.refreshing}
     />
   );
 

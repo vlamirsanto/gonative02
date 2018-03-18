@@ -4,8 +4,8 @@ import { general, metrics, colors } from 'styles';
 export default StyleSheet.create({
   container: {
     ...general.box,
-    marginHorizontal: metrics.baseMargin,
-    marginTop: metrics.baseMargin,
+    marginHorizontal: metrics.basePadding,
+    marginTop: metrics.basePadding,
   },
   repoTitle: {
     fontWeight: 'bold',
